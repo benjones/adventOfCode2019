@@ -1,7 +1,7 @@
 module cpu;
 import std.stdio;
 
-int runProgram(int[] array, int[] inputs){
+int runProgram(int[] array, int[] inputs, ref int[] output){
    int pc = 0;
    while(true){
        //    writeln("pc: ", pc, " arr: ", array);
@@ -43,6 +43,7 @@ int runProgram(int[] array, int[] inputs){
            case 4:
                int toPrint = mode1 == 1 ? array[pc +1] : array[array[pc +1]];
                writeln("output: ", toPrint);
+               output ~= toPrint;
                pc += 2;
                break;
 
