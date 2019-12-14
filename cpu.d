@@ -88,6 +88,7 @@ struct CPU{
                 case 3: //input
                     if(input.empty)
                         return RetCode.Blocked;
+                    writeln("input is: ", (*input)[0]);
                     memory[realAddress(1)] = (*input)[0];
                     *input = (*input)[1.. $];
                     pc += 2;
@@ -95,7 +96,7 @@ struct CPU{
 
                 case 4:
                     long toPrint = readOp(1);
-                    writeln("output: ", toPrint);
+                    //                    writeln("output: ", toPrint);
                     *output ~= toPrint;
                     pc += 2;
                     break;
