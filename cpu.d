@@ -16,12 +16,12 @@ struct CPU{
     long relativeOffset; 
     enum RetCode{ Halted, Blocked};
 
-    this(long[] insts, IOPort* inp, IOPort* outp){
+    this(long[] insts, ref IOPort inp, ref IOPort outp){
         foreach(i, inst; insts){
             memory[i] = inst;
         }
-        input = inp;
-        output = outp;
+        input = &inp;
+        output = &outp;
         pc = 0;
         relativeOffset = 0;
     }
@@ -88,7 +88,7 @@ struct CPU{
                 case 3: //input
                     if(input.empty)
                         return RetCode.Blocked;
-                    writeln("input is: ", (*input)[0]);
+                    //writeln("input is: ", (*input)[0]);
                     memory[realAddress(1)] = (*input)[0];
                     *input = (*input)[1.. $];
                     pc += 2;
